@@ -1,0 +1,15 @@
+.config/*
+.config/thorium
+!.config/
+
+!.config/btop
+!.config/eww
+!.config/hypr
+!.config/kitty
+!.config/lazygit
+!.config/nvim
+!.config/spotify-player
+!.config/tmux
+!.config/ulauncher
+!.config/waybar
+!.config/yazi

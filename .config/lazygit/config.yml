@@ -1,0 +1,40 @@
+theme:
+  activeBorderColor:
+    - '#8aadf4'
+    - bold
+  inactiveBorderColor:
+    - '#a5adcb'
+  optionsTextColor:
+    - '#8aadf4'
+  selectedLineBgColor:
+    - '#363a4f'
+  cherryPickedCommitBgColor:
+    - '#494d64'
+  cherryPickedCommitFgColor:
+    - '#8aadf4'
+  unstagedChangesColor:
+    - '#ed8796'
+  defaultFgColor:
+    - '#cad3f5'
+  searchingActiveBorderColor:
+    - '#eed49f'
+
+authorColors:
+  '*': '#b7bdf8'
+
+
+
+customCommands:
+    - key: "<c-a>" # ctrl + a
+      description: "Pick AI commit"
+      command: 'echo "{{.Form.Msg}}" > .git/COMMIT_EDITMSG && nvim .git/COMMIT_EDITMSG && [ -s .git/COMMIT_EDITMSG ] && git commit -F .git/COMMIT_EDITMSG || echo "Commit message is empty, commit aborted."'
+      context: "files"
+      subprocess: true
+      prompts:
+          - type: "menuFromCommand"
+            title: "AI Commits"
+            key: "Msg"
+            command: "bunx bunnai"
+            filter: '^(?P<number>\d+)\.\s(?P<message>.+)$'
+            valueFormat: "{{ .message }}"
+            labelFormat: "{{ .number }}: {{ .message | green }}"

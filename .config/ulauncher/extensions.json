@@ -1,0 +1,30 @@
+{
+    "com.github.iboyperson.ulauncher-system": {
+        "id": "com.github.iboyperson.ulauncher-system",
+        "url": "https://github.com/iboyperson/ulauncher-system",
+        "updated_at": "2024-06-03T01:50:04.859447",
+        "last_commit": "7dedd992709fa2297735cddf852404144d4da47c",
+        "last_commit_time": "2023-11-14T16:53:20"
+    },
+    "com.github.ulauncher.ulauncher-emoji": {
+        "id": "com.github.ulauncher.ulauncher-emoji",
+        "url": "https://github.com/Ulauncher/ulauncher-emoji",
+        "updated_at": "2024-06-03T01:50:44.280238",
+        "last_commit": "827cfe5e1d2f89f742f811f981759787b0654fa9",
+        "last_commit_time": "2023-11-04T18:37:13"
+    },
+    "com.github.the-lay.ulauncher-spotify-api": {
+        "id": "com.github.the-lay.ulauncher-spotify-api",
+        "url": "https://github.com/the-lay/ulauncher-spotify-api",
+        "updated_at": "2024-06-03T01:53:46.228036",
+        "last_commit": "7ffedbe72ea62f797d13be5dd90472ce26b7eb3d",
+        "last_commit_time": "2023-07-29T09:23:34"
+    },
+    "com.github.seqizz.ulauncher-tmux-attach": {
+        "id": "com.github.seqizz.ulauncher-tmux-attach",
+        "url": "https://github.com/seqizz/ulauncher-tmux-attach",
+        "updated_at": "2024-06-03T01:54:43.182773",
+        "last_commit": "b6a84559e128ceaa8255d4c08feead8604efecfe",
+        "last_commit_time": "2021-04-14T05:49:52"
+    }
+}
