@@ -61,7 +61,7 @@ export LIBVIRT_DEFAULT_URI=qemu:///system
 export EDITOR="nvim"
 export PATH="$HOME/.cargo/bin/:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
-export OPENAI_API_KEY=$(pass openai)
+# export OPENAI_API_KEY=$(pass openai)
 
 # pnpm
 export PNPM_HOME="/home/luka/.local/share/pnpm"

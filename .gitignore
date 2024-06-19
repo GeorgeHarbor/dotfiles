@@ -1,5 +1,4 @@
 .config/*
-.config/thorium
 !.config/
 
 !.config/btop
@@ -7,8 +6,10 @@
 !.config/hypr
 !.config/kitty
 !.config/lazygit
-!.config/nvim
 !.config/spotify-player
+!.config/nvim
+!.config/nvim/*
+!.config/starship.toml
 !.config/tmux
 !.config/ulauncher
 !.config/waybar
