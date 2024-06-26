@@ -51,6 +51,9 @@ PROMPT='[%n@%m %1~]$ '
 alias ff='fzf --preview="bat --color=always {}"'
 alias ffn='nvim $(fzf --preview="bat --color=always {}")'
 
+# love alias
+alias hawktuah='git push'
+
 
 # Initialize starship and zoxide
 eval "$(starship init zsh)"
