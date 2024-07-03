@@ -29,6 +29,10 @@ lspconfig.cssls.setup {
   },
 }
 
+lspconfig.golangci_lint_ls.setup{}
+
+lspconfig.gopls.setup{}
+
 -- lspconfig.ruff.setup {
 --   on_attach = on_attach,
 --   on_init = on_init,
