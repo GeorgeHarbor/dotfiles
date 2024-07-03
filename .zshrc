@@ -44,6 +44,9 @@ bindkey "^[[1;5D" backward-word
 # Spotify alias
 alias spt='spotify_player'
 
+# cat alias
+alias cat='bat'
+
 # Prompt
 PROMPT='[%n@%m %1~]$ '
 
@@ -75,6 +78,8 @@ source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh pnpm end
 source ~/.zsh/antigen.zsh
+
+source <(fzf --zsh)
 
 # bun completions
 [ -s "/home/luka/.bun/_bun" ] && source "/home/luka/.bun/_bun"
