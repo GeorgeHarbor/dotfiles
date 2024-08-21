@@ -20,3 +20,9 @@ require("nvim-tree").setup {
 }
 
 vim.o.conceallevel = 1
+
+vim.o.scrolloff = 8
+
+
+vim.g.OmniSharp_highlighting = 3
+

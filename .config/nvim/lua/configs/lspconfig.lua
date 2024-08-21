@@ -4,6 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
+local lsp_status = require "lsp-status"
 local servers = { "html" }
 
 -- lsps with default config
@@ -29,9 +30,9 @@ lspconfig.cssls.setup {
   },
 }
 
-lspconfig.golangci_lint_ls.setup{}
+lspconfig.golangci_lint_ls.setup {}
 
-lspconfig.gopls.setup{}
+lspconfig.gopls.setup {}
 
 -- lspconfig.ruff.setup {
 --   on_attach = on_attach,
@@ -39,7 +40,7 @@ lspconfig.gopls.setup{}
 --   capabilities = capabilities,
 -- }
 
-lspconfig.pyright.setup{
+lspconfig.pyright.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities
@@ -77,12 +78,42 @@ lspconfig.pylsp.setup {
   },
 }
 
-lspconfig.omnisharp.setup {
-  cmd = { "/bin/omnisharp" },
-  on_attach = on_attach,
-  on_init = on_init,
+lsp_status.register_progress()
+
+lspconfig.omnisharp.setup({
+  cmd = { "omnisharp" },
   capabilities = capabilities,
-}
+  enable_roslyn_analysers = true,
+  enable_import_completion = true,
+  organize_imports_on_format = true,
+  enable_decompilation_support = true,
+  filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props', 'csx', 'targets' },
+  root_dir = function(fname)
+    return require 'lspconfig'.util.root_pattern('omnisharp.json', '.editorconfig')(fname)
+        or require 'lspconfig'.util.root_pattern('*.sln')(fname)
+        or require 'lspconfig'.util.root_pattern('*.csproj')(fname)
+  end,
+})
+
+-- lspconfig.roslyn_lsp.setup({
+--   cmd = {"dotnet", "~/csharp/roslyn-lsp/Microsoft.CodeAnalysis.LanguageServer.dll"},
+--   root_dir = lspconfig.util.root_pattern(".git", "project.sln"),
+--   on_attach = on_attach,
+--   handlers = {
+--     ["textDocument/definition"] = require('omnisharp_extended').definition_handler,
+--     ["textDocument/typeDefinition"] = require('omnisharp_extended').type_definition_handler,
+--     ["textDocument/references"] = require('omnisharp_extended').references_handler,
+--     ["textDocument/implementation"] = require('omnisharp_extended').implementation_handler,
+--   },
+--
+-- })
+
+-- lspconfig.csharp_ls.setup {
+--   -- cmd = { "/usr/bin/omnisharp"},
+--   on_attach = on_attach,
+--   on_init = on_init,
+--   capabilities = capabilities,
+-- }
 -- typescript
 lspconfig.tsserver.setup {
   on_attach = on_attach,

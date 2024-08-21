@@ -13,9 +13,16 @@ return {
 	-- openai_api_key = { "bw", "get", "password", "OPENAI_API_KEY" },
 	-- openai_api_key: "sk-...",
 	-- openai_api_key = os.getenv("env_name.."),
-	openai_api_key = {"pass", "openai"},
+	-- openai_api_key = {"pass", "openai"},
 	-- api endpoint (you can change this to azure endpoint)
-	openai_api_endpoint = "https://api.openai.com/v1/chat/completions",
+	-- openai_api_endpoint = "https://api.openai.com/v1/chat/completions",
+
+      providers = {
+        openai = {
+          endpoint = "https://api.openai.com/v1/chat/completions",
+          secret = {"pass", "openai"}
+        }
+      },
 	-- openai_api_endpoint = "https://$URL.openai.azure.com/openai/deployments/{{model}}/chat/completions?api-version=2023-03-15-preview",
 	-- prefix for all commands
 	cmd_prefix = "Gp",
@@ -169,116 +176,130 @@ return {
 	-- by eliminating silence and speeding up the tempo of the recording
 	-- we can reduce the cost by 50% or more and get the results faster
 	-- directory for storing whisper files
-	whisper_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_whisper",
-	-- multiplier of RMS level dB for threshold used by sox to detect silence vs speech
-	-- decibels are negative, the recording is normalized to -3dB =>
-	-- increase this number to pick up more (weaker) sounds as possible speech
-	-- decrease this number to pick up only louder sounds as possible speech
-	-- you can disable silence trimming by setting this a very high number (like 1000.0)
-	whisper_silence = "1.75",
-	-- whisper max recording time (mm:ss)
-	whisper_rec_cmd = "05:00",
-	-- whisper tempo (1.0 is normal speed)
-	whisper_tempo = "1.75",
-	-- The language of the input audio, in ISO-639-1 format.
-	whisper_language = "en",
+	-- whisper_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_whisper",
+	-- -- multiplier of RMS level dB for threshold used by sox to detect silence vs speech
+	-- -- decibels are negative, the recording is normalized to -3dB =>
+	-- -- increase this number to pick up more (weaker) sounds as possible speech
+	-- -- decrease this number to pick up only louder sounds as possible speech
+	-- -- you can disable silence trimming by setting this a very high number (like 1000.0)
+	-- whisper_silence = "1.75",
+	-- -- whisper max recording time (mm:ss)
+	-- whisper_rec_cmd = "05:00",
+	-- -- whisper tempo (1.0 is normal speed)
+	-- whisper_tempo = "1.75",
+	-- -- The language of the input audio, in ISO-639-1 format.
+	-- whisper_language = "en",
+
+
+      whisper = {
+        store_dir =(os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_whisper",
+        language = "en",
+        silence = "1.75",
+        rec_cmd = "05:00",
+        tempo = "1.75",
+      },
 
 	-- image generation settings
 	-- image prompt prefix for asking user for input (supports {{agent}} template variable)
-	image_prompt_prefix_template = "🖌️ {{agent}} ~ ",
-	-- image prompt prefix for asking location to save the image
-	image_prompt_save = "🖌️💾 ~ ",
-	-- default folder for saving images
-	image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
+	-- image_prompt_prefix_template = "🖌️ {{agent}} ~ ",
+	-- -- image prompt prefix for asking location to save the image
+	-- image_prompt_save = "🖌️💾 ~ ",
+	-- -- default folder for saving images
+	-- image_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
 	-- default image agents (model + settings)
 	-- to remove some default agent completely set it just with the name like:
 	-- image_agents = {  { name = "DALL-E-3-1024x1792-vivid" }, ... },
-	image_agents = {
-		{
-			name = "DALL-E-3-1024x1024-vivid",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "vivid",
-			size = "1024x1024",
-		},
-		{
-			name = "DALL-E-3-1792x1024-vivid",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "vivid",
-			size = "1792x1024",
-		},
-		{
-			name = "DALL-E-3-1024x1792-vivid",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "vivid",
-			size = "1024x1792",
-		},
-		{
-			name = "DALL-E-3-1024x1024-natural",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "natural",
-			size = "1024x1024",
-		},
-		{
-			name = "DALL-E-3-1792x1024-natural",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "natural",
-			size = "1792x1024",
-		},
-		{
-			name = "DALL-E-3-1024x1792-natural",
-			model = "dall-e-3",
-			quality = "standard",
-			style = "natural",
-			size = "1024x1792",
-		},
-		{
-			name = "DALL-E-3-1024x1024-vivid-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "vivid",
-			size = "1024x1024",
-		},
-		{
-			name = "DALL-E-3-1792x1024-vivid-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "vivid",
-			size = "1792x1024",
-		},
-		{
-			name = "DALL-E-3-1024x1792-vivid-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "vivid",
-			size = "1024x1792",
-		},
-		{
-			name = "DALL-E-3-1024x1024-natural-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "natural",
-			size = "1024x1024",
-		},
-		{
-			name = "DALL-E-3-1792x1024-natural-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "natural",
-			size = "1792x1024",
-		},
-		{
-			name = "DALL-E-3-1024x1792-natural-hd",
-			model = "dall-e-3",
-			quality = "hd",
-			style = "natural",
-			size = "1024x1792",
-		},
-	},
+      image = {
+        agents = {
+          {
+            name = "DALL-E-3-1024x1024-vivid",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "vivid",
+            size = "1024x1024",
+          },
+          {
+            name = "DALL-E-3-1792x1024-vivid",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "vivid",
+            size = "1792x1024",
+          },
+          {
+            name = "DALL-E-3-1024x1792-vivid",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "vivid",
+            size = "1024x1792",
+          },
+          {
+            name = "DALL-E-3-1024x1024-natural",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "natural",
+            size = "1024x1024",
+          },
+          {
+            name = "DALL-E-3-1792x1024-natural",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "natural",
+            size = "1792x1024",
+          },
+          {
+            name = "DALL-E-3-1024x1792-natural",
+            model = "dall-e-3",
+            quality = "standard",
+            style = "natural",
+            size = "1024x1792",
+          },
+          {
+            name = "DALL-E-3-1024x1024-vivid-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "vivid",
+            size = "1024x1024",
+          },
+          {
+            name = "DALL-E-3-1792x1024-vivid-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "vivid",
+            size = "1792x1024",
+          },
+          {
+            name = "DALL-E-3-1024x1792-vivid-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "vivid",
+            size = "1024x1792",
+          },
+          {
+            name = "DALL-E-3-1024x1024-natural-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "natural",
+            size = "1024x1024",
+          },
+          {
+            name = "DALL-E-3-1792x1024-natural-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "natural",
+            size = "1792x1024",
+          },
+          {
+            name = "DALL-E-3-1024x1792-natural-hd",
+            model = "dall-e-3",
+            quality = "hd",
+            style = "natural",
+            size = "1024x1792",
+          },
+        },
+        store_dir = (os.getenv("TMPDIR") or os.getenv("TEMP") or "/tmp") .. "/gp_images",
+        prompt_save = "🖌️💾 ~ ",
+        prompt_prefix_template = "🖌️ {{agent}} ~ ",
+      },
 
 	-- example hook functions (see Extend functionality section in the README)
 	hooks = {

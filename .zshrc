@@ -57,6 +57,17 @@ alias ffn='nvim $(fzf --preview="bat --color=always {}")'
 # love alias
 alias hawktuah='git push'
 
+# chatgpt alias
+cg() {
+    chatgpt "$@" | glow
+}
+
+cgp -p() {
+    chatgpt "$@" | glow -p
+}
+
+# dotnet aspnet generator alias
+alias dac='dotnet aspnet-codegenerator'
 
 # Initialize starship and zoxide
 eval "$(starship init zsh)"
@@ -68,6 +79,7 @@ export EDITOR="nvim"
 export PATH="$HOME/.cargo/bin/:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
 # export OPENAI_API_KEY=$(pass openai)
+export PATH="$PATH:/home/luka/.dotnet/tools"
 
 # pnpm
 export PNPM_HOME="/home/luka/.local/share/pnpm"
@@ -87,3 +99,9 @@ source <(fzf --zsh)
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH=$PATH:/home/luka/.spicetify
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
