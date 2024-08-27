@@ -16,6 +16,12 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig.eslint.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+}
+
 lspconfig.cssls.setup {
   settings = {
     css = { validate = true, lint = {
@@ -118,15 +124,24 @@ lspconfig.omnisharp.setup({
 lspconfig.tsserver.setup {
   on_attach = on_attach,
   on_init = on_init,
-  capabilities = capabilities,
+  capabilities = require'cmp_nvim_lsp'.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "vue",
+  },
 }
 
-lspconfig.tailwindcss.setup {
-  cmd = { "tailwindcss-language-server", "--stdio" },
-  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-  root_dir = lspconfig.util.root_pattern("tailwind.config.js", "package.json"),
-  settings = {},
-}
+-- lspconfig.tailwindcss.setup {
+--   cmd = { "tailwindcss-language-server", "--stdio" },
+--   filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+--   root_dir = lspconfig.util.root_pattern("tailwind.config.js", "package.json"),
+--   settings = {},
+-- }
 
 lspconfig.emmet_language_server.setup {
   filetypes = {
@@ -140,6 +155,7 @@ lspconfig.emmet_language_server.setup {
     "scss",
     "pug",
     "typescriptreact",
+    "typescript"
   },
   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
   -- **Note:** only the options listed in the table are supported.

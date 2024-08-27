@@ -38,15 +38,27 @@ vim.schedule(function()
   require "mappings"
 end)
 
+require("configs.cmpconfig")
 
 local npairs = require('nvim-autopairs')
 local Rule = require('nvim-autopairs.rule')
 
 -- Add a rule to always close angle brackets in C# files
 npairs.add_rules({
-    Rule("<", ">")
+  Rule("<", ">")
     :with_pair(function()
-        local filetype = vim.bo.filetype
-        return filetype == "cs"  -- Only apply in C# files
+      local filetype = vim.bo.filetype
+      return filetype == "cs"  -- Only apply in C# files
     end)
 })
+vim.cmd [[
+  autocmd BufRead,BufNewFile *.ts set filetype=typescript
+]]
+
+
+-- local ls = require('luasnip')
+--
+-- ls.snippets = {
+--   typescript = ls.snippets.typescriptreact,
+--   javascript = ls.snippets.javascriptreact,
+-- }
