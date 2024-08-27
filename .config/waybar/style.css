@@ -7,6 +7,15 @@
     min-height: 0;
 }
 
+#custom-network-speed {
+    background: #1e1e2e;
+    padding: 0px 10px;
+    margin: 3px 0px;
+    margin-top: 10px;
+    border: 1px solid #181825;
+    color: #1e1e2e;
+}
+
 window#waybar {
     background: rgba(21, 18, 27, 0);
     color: #cdd6f4;
@@ -47,6 +56,7 @@ tooltip {
     color: #cdd6f4;
 }
 
+#custom-network-speed,
 #custom-language,
 #custom-updates,
 #custom-caffeine,
