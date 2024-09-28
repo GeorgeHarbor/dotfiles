@@ -40,6 +40,7 @@ alias neofetch='fastfetch'
 alias sudo='doas'
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+bindkey '^g' autosuggest-accept
 
 # Spotify alias
 alias spt='spotify_player'
@@ -69,6 +70,15 @@ cgp -p() {
 # dotnet aspnet generator alias
 alias dac='dotnet aspnet-codegenerator'
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # Initialize starship and zoxide
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
@@ -89,7 +99,7 @@ fi
 source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh pnpm end
-source ~/.zsh/antigen.zsh
+# source ~/.zsh/antigen.zsh
 
 source <(fzf --zsh)
 
@@ -102,6 +112,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH=$PATH:/home/luka/.spicetify
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

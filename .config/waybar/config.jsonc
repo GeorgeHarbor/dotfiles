@@ -17,7 +17,8 @@
     "custom/updates",
     "custom/language",
     "pulseaudio",
-    "custom/network_speed"
+    "network",
+    "backlight/slider"
         // "pulseaudio#microphone"
   ],
 
@@ -56,7 +57,7 @@
   },
   "clock": {
     "interval": 60,
-    "format": "{:%H:%M}",
+    "format": "{:%H:%M | %a %d.%m.%Y}",
     "max-length": 25
   },
   "pulseaudio": {
@@ -72,14 +73,26 @@
       "default": ["", ""]
     },
     "scroll-step": 1,
-    "on-click": "pavucontrol",
+    "on-click": "echo $(pactl list short sinks | awk '{print $2}' | rofi -dmenu -p 'Select Sink') | xargs -I {} pactl set-default-sink {}",
     "ignored-sinks": ["Easy Effects Sink"]
   },
-
-  "custom/network_speed": {
-    "exec": "~/.config/waybar/scripts/waybar-network.sh",
-    "interval": 1,
-    "tooltip": false,
-    "name": "custom-network-speed"
+  "network": {
+    "interface": "eno1",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "",
+    "format-disconnected": "", //An empty format will hide the module.
+    "on-click": "nm-connection-editor",
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "backlight/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+    "device": ""
   }
 }

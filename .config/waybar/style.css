@@ -19,16 +19,20 @@
 window#waybar {
     background: rgba(21, 18, 27, 0);
     color: #cdd6f4;
+    margin: 0px;
+    padding: 0px;
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: #2e1e2e;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
     border-color: #11111b;
 }
-
+#workspaces {
+    background: red
+}
 #workspaces button {
     padding: 5px;
     color: #313244;
@@ -49,11 +53,12 @@ tooltip {
     color: #11111b;
     background: #a6e3a1;
     border-radius: 10px;
+    
 }
 
 #workspaces button:hover {
-    background: #11111b;
-    color: #cdd6f4;
+  color: white;
+  background: none;
 }
 
 #custom-network-speed,

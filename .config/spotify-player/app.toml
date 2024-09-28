@@ -20,6 +20,7 @@ enable_media_control = true
 enable_streaming = "Always"
 enable_cover_image_cache = true
 default_device = "spotify-player"
+prefs_path = ~/.config/spotify/prefs
 
 [copy_command]
 command = "xclip"

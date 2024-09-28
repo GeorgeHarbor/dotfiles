@@ -3,6 +3,8 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local unset = vim.keymap.del
+unset("n", "<leader>h")
 
 map("i", "jk", "<ESC>")
 map("n", "<leader>gg", "<cmd> LazyGit<CR>", { desc = "LazyGit" })
@@ -64,4 +66,8 @@ vim.api.nvim_set_keymap('n', 'dgr', '<cmd>lua require("omnisharp_extended").lsp_
 -- Replaces vim.lsp.buf.implementation()
 vim.api.nvim_set_keymap('n', 'dgi', '<cmd>lua require("omnisharp_extended").lsp_implementation()<CR>',
   { noremap = true, silent = true })
+
+-- HARPOON
+map("n", "<leader>hi", "<cmd> Telescope harpoon marks<CR>", { desc = "Toggle Harpoon" })
+map("n", "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<CR>", { desc = "Harpoon Add File" })
 
