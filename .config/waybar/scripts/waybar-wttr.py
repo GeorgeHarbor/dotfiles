@@ -58,16 +58,11 @@ WEATHER_CODES = {
 data = {}
 
 
-weather = requests.get("https://wttr.in/?format=j1&lang=sr").json()
+weather = requests.get("https://wttr.in/?format=j1&lang=sr?M").json()
 
 
 def format_time(time):
     return time.replace("00", "").zfill(2)
-
-
-def format_temp(temp):
-    return (hour['FeelsLikeC']+"°").ljust(3)
-
 
 def format_chances(hour):
     chances = {
@@ -113,7 +108,7 @@ for i, day in enumerate(weather['weather']):
         if i == 0:
             if int(format_time(hour['time'])) < datetime.now().hour-2:
                 continue
-        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]} {format_temp(hour['FeelsLikeC'])} {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
+        data['tooltip'] += f"{format_time(hour['time'])} {WEATHER_CODES[hour['weatherCode']]}  {hour['weatherDesc'][0]['value']}, {format_chances(hour)}\n"
 
 
 print(json.dumps(data))
