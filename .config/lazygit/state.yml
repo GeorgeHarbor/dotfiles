@@ -1,19 +1,11 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/luka/dotfiles
-    - /home/luka/Projects/RestApiCourse
-    - /home/luka/Projects/py-api
-    - /home/luka/Projects/Activities
-    - /home/luka/Projects/t3gallery
-    - /home/luka/GitDownloads/submarr
-    - /home/luka/Projects/GowiHub
-    - /home/luka/Projects/ecom
-    - /home/luka/Projects/TestApp
 startuppopupversion: 5
-lastversion: 0.44.1
+lastversion: 0.48.0
 customcommandshistory:
     - qa
-hidecommandlog: false
+hidecommandlog: true
 ignorewhitespaceindiffview: false
 diffcontextsize: 3
 renamesimilaritythreshold: 50
