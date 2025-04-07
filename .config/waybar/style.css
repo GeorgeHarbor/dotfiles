@@ -1,161 +1,101 @@
-* {
-    border: none;
-    border-radius: 0;
-    font-family: Cartograph CF Nerd Font, monospace;
-    font-weight: bold;
-    font-size: 14px;
-    min-height: 0;
-}
 
-#custom-network-speed {
-    background: #1e1e2e;
-    padding: 0px 10px;
-    margin: 3px 0px;
-    margin-top: 10px;
-    border: 1px solid #181825;
-    color: #1e1e2e;
+@define-color   base    #191724;
+@define-color   hl_low  #21202e;
+@define-color   text    #e0def4;
+@define-color   red     #eb6f92;
+@define-color   green   #31748f;
+@define-color   blue    #9ccfd8;
+@define-color   yello   #f6c177;
+
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: NotoSans;
+  font-size: 15px;
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
-    margin: 0px;
-    padding: 0px;
+  background: @base;
+  border: 2px solid @hl_low;
+  border-radius: 8px;
+  color: @text;
 }
 
-tooltip {
-    background: #2e1e2e;
-    border-radius: 10px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #11111b;
+button {
+  background: none;
+  border: none;
+  border-radius: 0;
 }
+
 #workspaces {
-    background: red
+  margin-left: 4px;
 }
+
 #workspaces button {
-    padding: 5px;
-    color: #313244;
-    margin-right: 5px;
-}
-
-#workspaces button.active {
-    color: #a6adc8;
-}
-
-#workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
-    border-radius: 10px;
-}
-
-#workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
-    border-radius: 10px;
-    
+  padding: 0px 5px 0 5px;
+  color: @text;
 }
 
 #workspaces button:hover {
-  color: white;
-  background: none;
+  color: @blue;
+  box-shadow: none;
 }
 
-#custom-network-speed,
-#custom-language,
-#custom-updates,
-#custom-caffeine,
-#custom-weather,
-#window,
-#clock,
-#battery,
-#pulseaudio,
-#network,
-#workspaces,
-#tray,
-#backlight {
-    background: #1e1e2e;
-    padding: 0px 10px;
-    margin: 3px 0px;
-    margin-top: 10px;
-    border: 1px solid #181825;
+#workspaces button.active,
+#workspaces button.focused {
+  color: @blue;
 }
 
-#tray {
-    border-radius: 10px;
-    margin-right: 10px;
+#workspaces button.urgent {
+  color: @red;
 }
 
-#workspaces {
-    background: #1e1e2e;
-    border-radius: 10px;
-    margin-left: 10px;
-    padding-right: 0px;
-    padding-left: 5px;
+.modules-left {
+  margin-left: 12px;
 }
 
-#custom-caffeine {
-    color: #89dceb;
-    border-radius: 10px 0px 0px 10px;
-    border-right: 0px;
-    margin-left: 10px;
+.modules-right {
+  margin-right: 4px;
 }
 
-#custom-language {
-    color: #f38ba8;
-    border-left: 0px;
-    border-right: 0px;
+.modules-right * {
+  padding: 0 8px;
+  color: @text;
 }
 
-#custom-updates {
-    color: #f5c2e7;
-    border-radius: 10px 0px 0px 10px;
-    border-left: 0px;
-    border-right: 0px;
+#battery.charging,
+#battery.plugged {
+  color: @green;
 }
 
-#window {
-    border-radius: 10px;
-    margin-left: 60px;
-    margin-right: 60px;
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
-#clock {
-    color: #fab387;
-    border-radius: 10px 0px 0px 10px;
-    margin-left: 5px;
-    border-right: 0px;
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-#network {
-    color: #f9e2af;
-    border-left: 0px;
-    border-right: 0px;
+#network.disconnected {
+  color: @red;
 }
 
 #pulseaudio {
-    color: #89b4fa;
-    border-left: 0px;
-    border-right: 0px;
+  margin-right: -6px;
 }
 
-#pulseaudio.microphone {
-    color: #cba6f7;
-    border-radius: 0px 10px 10px 0px;
-    border-left: 0px;
-    border-right: 0px;
-    margin-right: 5px;
+#pulseaudio.muted {
+  color: @red;
 }
 
-#battery {
-    color: #a6e3a1;
-    border-radius: 0 10px 10px 0;
-    margin-right: 10px;
-    border-left: 0px;
-}
-
-#custom-weather {
-    border-radius: 0px 10px 10px 0px;
-    border-right: 0px;
-    margin-left: 0px;
+#custom-power:hover {
+  color: @red;
 }

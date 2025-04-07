@@ -1,98 +1,102 @@
 {
-  "layer": "top",
-  "position": "top",
-  "mode": "dock",
-  "exclusive": true,
-  "passthrough": false,
-  "gtk-layer-shell": true,
-  "height": 0,
+  "height": 30,
+  "margin-top": 8,
+  "margin-bottom": 0,
+  "margin-left": 12,
+  "margin-right": 12,
   "modules-left": [
-    "clock",
-    "custom/weather",
-    "hyprland/workspaces"
+    "image",
+    "hyprland/workspaces",
   ],
-  "modules-center": ["hyprland/window"],
+  "modules-center": [
+    "hyprland/window",
+  ],
   "modules-right": [
-    "tray",
-    "custom/updates",
-    "custom/language",
     "pulseaudio",
+    "battery",
     "network",
-    "backlight/slider"
-        // "pulseaudio#microphone"
+    "clock",
+    "custom/power"
   ],
-
-  "hyprland/window": {
-    "format": "{}",
-    "exec": "./scripts/waybar-active-window.sh",
-    "interval": 1
-  },
   "hyprland/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": false,
-    "on-click": "activate",
-        // "persistent_workspaces": {
-        //     "1": [],
-        //     "2": [],
-        //     "3": [],
-        //     "4": [],
-        //     "5": [],
-        //     "6": [],
-        //     "7": [],
-        //     "8": [],
-        //     "9": [],
-        //     "10": []
-        // }
-  },
-  "custom/weather" : {
-    "tooltip" : true,
-    "format" : "{}",
-    "interval" : 30,
-    "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-    "return-type" : "json"
-  },
-  "tray": {
-    "icon-size": 13,
-    "spacing": 10
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "format": "{icon}",
+    "format-icons": {
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
   },
   "clock": {
-    "interval": 60,
-    "format": "{:%H:%M | %a %d.%m.%Y}",
-    "max-length": 25
+    "timezone": "Asia/Yekaterinburg",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
   },
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", ""]
+  "backlight": {
+    "device": "eDP-2",
+    "format": "{icon}",
+    "tooltip-format": "Brightness: {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
-    "scroll-step": 1,
-    "on-click": "echo $(pactl list short sinks | awk '{print $2}' | rofi -dmenu -p 'Select Sink') | xargs -I {} pactl set-default-sink {}",
-    "ignored-sinks": ["Easy Effects Sink"]
+    "format": "{icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "network": {
-    "interface": "eno1",
-    "format": "{ifname}",
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "",
-    "format-disconnected": "", //An empty format will hide the module.
-    "on-click": "nm-connection-editor",
-    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50
+    "format-wifi": "",
+    "format-ethernet": "󱎔",
+    "tooltip-format": "Connected: {essid}",
+    "format-linked": "󱎔",
+    "format-disconnected": "󰤭",
   },
-  "backlight/slider": {
-    "min": 0,
-    "max": 100,
-    "orientation": "horizontal",
-    "device": ""
-  }
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon} ",
+    "format-muted": "󰖁",
+    "format-icons": {
+      "headphone": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  "image": {
+    "path": "/home/baolhq/Pictures/arch.png",
+    "size": 14,
+    "tooltip": true,
+    "tooltip-format": "Application menu",
+    "on-click": "~/.config/rofi/launchers/type-1/launcher.sh"
+  },
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip-format": "Power",
+    "on-click": "~/.config/rofi/powermenu/type-1/powermenu.sh",
+  },
 }
