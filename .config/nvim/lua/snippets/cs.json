@@ -1,0 +1,7 @@
+{
+  "Console.WriteLine Simplified": {
+    "prefix": "cw",
+    "body": "Console.WriteLine($1);",
+    "description": "Shortcut for Console.WriteLine"
+  }
+}

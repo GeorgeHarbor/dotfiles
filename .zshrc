@@ -110,8 +110,16 @@ source <(fzf --zsh)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export PATH=$PATH:/home/luka/.spicetify
+export SPOTIFY_ID="c0e20cab14f7491ab721169bc3532977"
+export SPOTIFY_SECRET="7ea4952c2afa4016bc4d39796ff3b746"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Define a stub nvm function that loads the real one on first use
+nvm() {
+  unset -f nvm            # remove this stub
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"
+  nvm "$@"                # re‑invoke the real nvm
+}
+
+export PATH=$PATH:/usr/libexec/qemu

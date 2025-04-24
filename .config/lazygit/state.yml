@@ -1,11 +1,16 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/luka/dotfiles
+    - /home/luka/projekti/MassTransitProject
+    - /home/luka/projekti/ads/ads
+    - /home/luka/projekti/leetcode-problems
+    - /home/luka/projekti/test
 startuppopupversion: 5
-lastversion: 0.48.0
+lastversion: 0.49.0
 customcommandshistory:
     - qa
-hidecommandlog: true
+    - q
+hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 3
 renamesimilaritythreshold: 50
