@@ -5,6 +5,7 @@ audiorelay
 gspt-git
 spotify
 spotify-player-full
+swayosd-git
 thorium-browser-bin
 wlogout
 yay

@@ -6,6 +6,7 @@ baobab
 base
 base-devel
 bat
+bc
 bluetui
 bluez-deprecated-tools
 bluez-utils
@@ -209,6 +210,7 @@ ttf-zed-mono-nerd
 vim
 vulkan-radeon
 waybar
+wev
 wget
 wireless_tools
 wireplumber
