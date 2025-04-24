@@ -1,0 +1,11 @@
+adwaita-dark
+adwaita-qt5
+adwaita-qt6
+audiorelay
+gspt-git
+spotify
+spotify-player-full
+thorium-browser-bin
+wlogout
+yay
+yay-debug
