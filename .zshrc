@@ -1,121 +1,127 @@
-# Lines configured by zsh-newuser-install
+# -------------------------------
+# Zsh configuration
+# -------------------------------
+
+# History
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/luka/.zshrc'
 
+# Completion system
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
-#
+zstyle :compinstall filename '/home/luka/.zshrc'
 
-# If not running interactively, don't do anything
+# Don't continue if not interactive
 [[ $- != *i* ]] && return
 
+# -------------------------------
+# Environment variables
+# -------------------------------
+
+export EDITOR="nvim"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.dotnet/tools:$PATH"
+export SPOTIFY_ID="c0e20cab14f7491ab721169bc3532977"
+export SPOTIFY_SECRET="7ea4952c2afa4016bc4d39796ff3b746"
+# export OPENAI_API_KEY=$(pass openai)  # Uncomment if needed
+
+# -------------------------------
 # Aliases
-alias ls='ls --color=auto'
+# -------------------------------
+
+alias ls='exa'
+alias l='exa -lbF --git'
+alias ll='exa -lbGF --git'
+alias llm='exa -lbGd --git --sort=modified'
+alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'
+alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'
+alias lS='exa -1'
+alias lt='exa --tree --level=2'
+
 alias grep='grep --color=auto'
-alias cd='z'
-
-# Exa aliases
-# general use
-alias ls='exa'                                                          # ls
-alias l='exa -lbF --git'                                                # list, size, type, git
-alias ll='exa -lbGF --git'                                              # long list
-alias llm='exa -lbGd --git --sort=modified'                             # long list, modified date sort
-alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'   # all list
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'  # all + extended list
-
-# specialty views
-alias lS='exa -1'                                                       # one column, just names
-alias lt='exa --tree --level=2'                                         # tree
-
-# Neofetch alias
 alias neofetch='fastfetch'
-
-# Doas alias
 alias sudo='doas'
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey '^g' autosuggest-accept
-
-# Spotify alias
-alias spt='spotify_player'
-
-# cat alias
+alias cd='z'
 alias cat='bat'
+alias spt='spotify_player'
+alias hawktuah='git push'
 
-# Prompt
-PROMPT='[%n@%m %1~]$ '
-
-# fzf Aliases
+# fzf aliases
 alias ff='fzf --preview="bat --color=always {}"'
 alias ffn='nvim $(fzf --preview="bat --color=always {}")'
 
-# love alias
-alias hawktuah='git push'
-
-# chatgpt alias
-cg() {
-    chatgpt "$@" | glow
-}
-
-cgp -p() {
-    chatgpt "$@" | glow -p
-}
-
-# dotnet aspnet generator alias
+# dotnet ASP.NET generator
 alias dac='dotnet aspnet-codegenerator'
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+# ChatGPT + glow
+cg() {
+  chatgpt "$@" | glow
+}
+cgp -p() {
+  chatgpt "$@" | glow -p
 }
 
-# Initialize starship and zoxide
+# yazi cd wrapper
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+function ffds() {
+  fzf --preview="bat --style=numbers --color=always --highlight-line {2} {1}" \
+      --bind "enter:execute(nvim {1} +{2})" \
+      --delimiter : \
+      --ansi
+}
+
+# -------------------------------
+# Antigen + Plugins
+# -------------------------------
+
+source ~/.zsh/antigen.zsh
+
+# vi-mode config before plugin is loaded
+function zvm_config() {
+  ZVM_VI_INSERT_SYMBOL="❯"
+  ZVM_VI_NORMAL_SYMBOL="❮"
+  ZVM_CURSOR_STYLE_ENABLED=true
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  ZVM_VI_INSERT_ESCAPE_BINDTIMEOUT=0.2
+}
+
+# Plugins
+antigen bundle jeffreytse/zsh-vi-mode
+antigen apply
+
+# Enable vi mode and custom keybindings
+bindkey -v
+bindkey -M viins '^g' autosuggest-accept
+
+# -------------------------------
+# Tool Initialization
+# -------------------------------
+
+# Disable Starship vi-mode module to prevent recursion
+# export STARSHIP_VI_MODE_INSERT=""
+# export STARSHIP_VI_MODE_NORMAL=""
+# export STARSHIP_VI_MODE_SYMBOL=""
+
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-
-# Environment variables
-export LIBVIRT_DEFAULT_URI=qemu:///system
-export EDITOR="nvim"
-export PATH="$HOME/.cargo/bin/:$PATH"
-export PATH="$HOME/.local/bin/:$PATH"
-# export OPENAI_API_KEY=$(pass openai)
-export PATH="$PATH:/home/luka/.dotnet/tools"
-
-# pnpm
-export PNPM_HOME="/home/luka/.local/share/pnpm"
-if [[ ":$PATH:" != *":$PNPM_HOME:"* ]]; then
-    export PATH="$PNPM_HOME:$PATH"
-fi
-source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh pnpm end
-# source ~/.zsh/antigen.zsh
-
+source /usr/share/nvm/init-nvm.sh
+source <(ng completion script)
 source <(fzf --zsh)
 
-# bun completions
-[ -s "/home/luka/.bun/_bun" ] && source "/home/luka/.bun/_bun"
+# Syntax Highlighting & Suggestions
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# -------------------------------
+# Prompt
+# -------------------------------
 
-export SPOTIFY_ID="c0e20cab14f7491ab721169bc3532977"
-export SPOTIFY_SECRET="7ea4952c2afa4016bc4d39796ff3b746"
-
-source /usr/share/nvm/init-nvm.sh
-export PATH=$PATH:/usr/libexec/qemu
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# PROMPT='[%n@%m %1~]$ '

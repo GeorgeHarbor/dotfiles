@@ -16,7 +16,7 @@ error_symbol = '[(red) ❯](maroon)'
 
 # Shows an icon that should be included by zshrc script based on the distribution or os
 [env_var.STARSHIP_DISTRO]
-format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
+format = '[$env_value](bold white)' # removed space between distro and rest for pwsh
 variable = "STARSHIP_DISTRO"
 disabled = true
 
@@ -25,7 +25,7 @@ disabled = true
 style_user = "white bold"
 style_root = "black bold"
 format = "[$user]($style) "
-disabled = true  # disable in powershell
+disabled = true             # disable in powershell
 show_always = false
 
 [battery]
@@ -42,7 +42,7 @@ format = "at [$path]($style)[$read_only]($read_only_style) "
 [git_branch]
 symbol = ' '
 format = "on [$symbol$branch]($style) "
-truncation_length = 18 
+truncation_length = 18
 truncation_symbol = "…/"
 style = "bold green"
 
@@ -93,8 +93,6 @@ format = 'via [$symbol($version )(🎯 $tfm )]($style)'
 # [kubernetes.context_aliases]
 # "clcreative-k8s-staging" = "cl-k8s-staging"
 # "clcreative-k8s-production" = "cl-k8s-prod"
-
-
 
 
 # palette tables should be last in the config ⚓️
