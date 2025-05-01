@@ -113,13 +113,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export SPOTIFY_ID="c0e20cab14f7491ab721169bc3532977"
 export SPOTIFY_SECRET="7ea4952c2afa4016bc4d39796ff3b746"
 
-
-# Define a stub nvm function that loads the real one on first use
-nvm() {
-  unset -f nvm            # remove this stub
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"
-  nvm "$@"                # re‑invoke the real nvm
-}
-
+source /usr/share/nvm/init-nvm.sh
 export PATH=$PATH:/usr/libexec/qemu
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
