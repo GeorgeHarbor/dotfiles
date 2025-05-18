@@ -112,8 +112,8 @@ bindkey -M viins '^g' autosuggest-accept
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
-source /usr/share/nvm/init-nvm.sh
-source <(ng completion script)
+# source /usr/share/nvm/init-nvm.sh
+# source <(ng completion script)
 source <(fzf --zsh)
 
 # Syntax Highlighting & Suggestions
